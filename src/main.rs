@@ -9,7 +9,7 @@ fn main() {
     let divisor = (1020_f32 / symbols.len() as f32).ceil() as u8;
     let filename = env::args().nth(1).expect("You must specify a file name");
     let scale: usize = env::args()
-        .nth(1)
+        .nth(2)
         .unwrap_or_else(|| "1".to_string())
         .parse()
         .unwrap();
