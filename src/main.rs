@@ -1,5 +1,5 @@
 use image::io::Reader;
-use std::env;
+use std::{env, process::exit};
 
 fn main() {
     let symbols = [
@@ -7,9 +7,16 @@ fn main() {
     ];
 
     let divisor = (1020_f32 / symbols.len() as f32).ceil() as u8;
-    let filename = env::args().nth(1).expect("You must specify a file name");
-    let scale: usize = env::args()
-        .nth(2)
+    let mut args = env::args().skip(1);
+    let filename = match args.next() {
+        Some(filename) => filename,
+        None => {
+            println!("Usage: ascii <image-path> [zoom-in-scale=1]");
+            exit(1)
+        }
+    };
+    let scale: usize = args
+        .next()
         .unwrap_or_else(|| "1".to_string())
         .parse()
         .unwrap();
