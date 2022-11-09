@@ -16,7 +16,7 @@ fn main() {
     let img = Reader::open(filename).unwrap().decode().unwrap().to_rgba8();
 
     img.rows().enumerate().for_each(|(i, p)| {
-        if i % scale * 2 == 0 {
+        if i % (scale * 2) == 0 {
             p.enumerate().for_each(|(i, p)| {
                 if i % scale == 0 {
                     let rgba = p.0;
